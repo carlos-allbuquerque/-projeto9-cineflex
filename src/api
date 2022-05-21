@@ -1,1 +1,5 @@
-https://mock-api.driven.com.br/api/v5/cineflex/movies
+
+
+https://mock-api.driven.com.br/api/v5/cineflex/movies/1/showtimes
+
+showtimes={session.showtimes.map((showtimes, index) => <Button>{showtimes.name}</Button>)}
