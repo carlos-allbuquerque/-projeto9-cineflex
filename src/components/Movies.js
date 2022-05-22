@@ -26,7 +26,7 @@ export default function Movies() {
 
     return (
         <>
-            <Title>Selecione o filme</Title>
+            <Box><Title>Selecione o filme</Title></Box>
             <Posters>
                 {movies.map((movie, index) => 
                 <Link to={`/sessoes/${movie.id}`}>
@@ -41,13 +41,19 @@ export default function Movies() {
     );
 }
 
+const Box = styled.div`
+    display: flex;
+    justify-content: center;
+`
+
 const Title = styled.h1`
     font-weight: 400;
     font-size: 24px;
     line-height: 28px;
     margin-top: 30px;
     margin-bottom: 20px;
-    
+    display: flex;
+    align-items: center;
 `
 
 const Posters = styled.ul`

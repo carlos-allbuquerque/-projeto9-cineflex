@@ -3,6 +3,7 @@ import axios from 'axios';
 import styled from 'styled-components';
 import { useState, useEffect } from "react";
 import {Link} from "react-router-dom";
+import Footer from "./Footer.js";
 
 function Session({
     weekday,
@@ -15,9 +16,9 @@ function Session({
         <Container>
             <Day>{weekday} - {date}</Day>
                 <Buttons>
-                    {showtimes.map((showtimes, index) => 
-                    <Link to={`/assentos/${showtimes.id}`}>
-                        <Button key={index}>{showtimes.name}</Button>
+                    {showtimes.map((showtime, index) => 
+                    <Link to={`/assentos/${showtime.id }`}>
+                        <Button key={index}>{showtime.name}</Button>
                         </Link>)}
                 </Buttons>
         </Container>
@@ -29,6 +30,8 @@ export default function Sessions() {
 
     const [sessions, setSessions] = useState([])
 
+    const [movie, setMovie] = useState({})
+
     const {idSessions} = useParams();
     console.log(idSessions);
 
@@ -37,6 +40,7 @@ export default function Sessions() {
         const promise = axios.get(`https://mock-api.driven.com.br/api/v5/cineflex/movies/${idSessions}/showtimes`);
 
         promise.then(response => { setSessions(response.data.days);
+            setMovie(response.data)
             console.log(sessions);
         });
     }, [])
@@ -44,10 +48,11 @@ export default function Sessions() {
 
     return(
         <>
-            <Title>Selecione o horário</Title>
+            <Box><Title>Selecione o horário</Title></Box>
             {sessions.map(session =>
             <Session weekday={session.weekday} date={session.date} showtimes={session.showtimes} key={session.id} />
             )}
+           <Footer posterURL={movie.posterURL} title={movie.title}/>
         </>
     );
 }
@@ -61,12 +66,17 @@ const Title = styled.h1`
     
 `
 const Container = styled.div`
-    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     margin-bottom: 20px;
     margin-left: 40px;
+    margin-bottom: 124px;
+`
+
+const Box = styled.div`
+    display: flex;
+    justify-content: center;
 `
 
 const Day = styled.h2`
@@ -75,8 +85,6 @@ const Day = styled.h2`
     line-height: 23px;
     margin-bottom: 20px;
 `
-
-
 
 const Buttons = styled.div`
     display: flex;
