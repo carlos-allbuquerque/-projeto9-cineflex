@@ -58,6 +58,7 @@ const Text = styled.h1`
     line-height: 28px;
     color: #247A6B;
     width: 150px;
+    text-align: center;
 `
 
 const Box = styled.div`
