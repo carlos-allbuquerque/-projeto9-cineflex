@@ -41,7 +41,7 @@ export default function Sessions() {
 
         promise.then(response => { setSessions(response.data.days);
             setMovie(response.data)
-            console.log(sessions);
+
         });
     }, [])
 

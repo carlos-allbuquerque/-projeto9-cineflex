@@ -8,7 +8,11 @@ export default function Footer({
     return (
         <Container>
         <Image><img src={posterURL} alt="" /></Image>
-        <Title>{title}</Title>
+        <Text>
+            <Title>{title}</Title>
+            <Session>{hours}</Session>
+        </Text>
+        
         </Container>
     ); 
 }
@@ -38,4 +42,14 @@ const Title = styled.h1`
     font-size: 26px;
     line-height: 30px;
     margin-left: 10px;
+`
+const Text = styled.div`
+
+`
+
+const Session = styled.h1`
+    font-weight: 400;
+    font-size: 26px;
+    line-height: 30px;
+    margin-left: 10px; 
 `
