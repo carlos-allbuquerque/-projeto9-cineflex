@@ -6,7 +6,7 @@ import Footer from "./Footer";
 import UserContext from "../provider/UserContext";
 
 let selectedSeats = [];
-
+let seatNames = [];
 function Seat({name, isAvailable, selectedSeats, id}) {
     
 
@@ -25,8 +25,10 @@ function Seat({name, isAvailable, selectedSeats, id}) {
                 setSelected(true);
                 if (!selectedSeats.includes(id)) {
                     selectedSeats.push(id) 
+                    seatNames.push(name);
                 }
                 console.log(selectedSeats);
+                console.log(seatNames);
 
             } else {
                 alert("Assento indispovível");
@@ -36,6 +38,7 @@ function Seat({name, isAvailable, selectedSeats, id}) {
                 setColor("#C3CFD9");
                 setSelected(false); 
                 selectedSeats.splice(selectedSeats.indexOf(id), 1);
+                seatNames.splice(seatNames.indexOf(name), 1);
             }
         }
 
@@ -84,7 +87,7 @@ export default function Seats() {
     function order() {
         axios.post("https://mock-api.driven.com.br/api/v5/cineflex/seats/book-many",
         {ids:[...selectedSeats], name: name, cpf: CPF}).catch(e => console.log(e))
-        setUser({idSeats, name, CPF, ids:[...selectedSeats]});
+        setUser({idSeats, name, CPF, ids:[...selectedSeats],names:[...seatNames]});
         selectedSeats = [];
         navigate("/sucesso");
     }
